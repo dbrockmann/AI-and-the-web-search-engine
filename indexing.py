@@ -51,3 +51,19 @@ class Index:
         str = str.lower()
 
         return str
+    
+    def search(self, search_query):
+        """
+        Search for a word in the index and retrieve a list of page which include that word
+
+        Args:
+            search_query: word to search for
+
+        Returns:
+            list of URLs which include the search word
+        """
+
+        if search_query in self.index:
+            return self.index[search_query]
+        else:
+            return []
