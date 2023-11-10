@@ -1,7 +1,11 @@
 
+import re
+from bs4 import BeautifulSoup
+
+
 class Index:
     """
-    Builds a simple dictionary based index with each word as the keys and a list of URLs that refer to pages including the word as values
+    Builds a simple dictionary based index with words as the keys and a list of URLs that refer to pages including the word as values
     """
 
     def __init__(self):
@@ -20,9 +24,30 @@ class Index:
             html_content: HTML content
         """
 
-        for word in html_content:
+        soup = BeautifulSoup(html_content, 'html.parser')
+        for str in soup.find_all(text=True):
+
+            for word in self.clean_str(str).split(' '):
             
-            if word in self.index:
-                self.index[word].append(url)
-            else:
-                self.index[word] = [url]
+                if word in self.index:
+                    if not url in self.index[word]:
+                        self.index[word].append(url)
+                else:
+                    self.index[word] = [url]
+
+    def clean_str(self, str):
+        """
+        Clean a string by removing everything but letters and make them lowercase
+
+        Args:
+            str: string to clean
+
+        Returns:
+            cleaned string
+        """
+
+        str = re.sub(r'[^\w\s]', '', str)
+        str = re.sub(r'\s{2,}', ' ', str)
+        str = str.lower()
+
+        return str
