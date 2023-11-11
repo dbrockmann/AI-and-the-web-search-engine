@@ -1,0 +1,28 @@
+/* result.css */
+
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #e0f7fa; /* Light blue background */
+    margin: 0; /* Reset default margin */
+    padding-left: 280px; /* Apply consistent left padding for all content */
+}
+
+h1, h2 {
+    margin-top: 120px;
+    font-size: 40px;
+    color: #0d4123; /* Dark green color for headers */
+    margin-left: 38px; /* Consistent left margin for headers */
+    text-align: left;
+}
+
+/* If there are other elements you want to align similarly, you can add them here. For example: */
+p, div, ul {
+    font-size: 26px;
+    margin-left: 20px; /* Apply the same left margin */
+}
+
+
+
+
+

@@ -9,13 +9,13 @@ def start():
     <html>
     <head>
         <title>Start Page</title>
-        <link rel="stylesheet" type="text/css" href="/static/style.css"> <!-- Link to your CSS file -->
+        <link rel="stylesheet" type="text/css" href="/static/start.css"> <!-- Link to your CSS file -->
     </head>
     <body>
         <h1>Best search engine ever</h1>
         <form action="/search-results" method="post">
             <input type="text" name="input_text" placeholder="Enter your text here">
-            <input type="submit" value="Submit">
+            <input type="submit" value="Suche">
         </form>
     </body>
     </html>
@@ -24,19 +24,32 @@ def start():
 
 @app.route("/search-results", methods=['POST'])
 def search_results():
+
     input_text = request.form['input_text']
+
+    # Eine vordefinierte Liste
+    fitting_urls = ["Element 1", "Element 2", "Element 3"]
+
+    # Erstellen der HTML-Liste
+    list_html = ''.join(f'<li>{item}</li>' for item in fitting_urls)
+
+
     return f'''
+    
     <!DOCTYPE html>
     <html>
     <head>
         <title>Search Results</title>
-        <link rel="stylesheet" type="text/css" href="/static/style.css">
+        <link rel="stylesheet" type="text/css" href="/static/result.css">
     </head>
     <body>
-        <h2>Best search engine ever - Search Results</h2>
-        <div class="content">
+        <h1>Best search engine ever - Search Results</h1>
+        <div>
             <p>Your results for the search: "{input_text}" are:</p>
-            <!-- Here you can add logic to display actual search results -->
+            <ul>
+                {list_html}
+            </ul>
+            <!-- Additional logic for displaying actual search results can be added here -->
         </div>
     </body>
     </html>
