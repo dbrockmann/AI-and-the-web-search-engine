@@ -119,10 +119,3 @@ class BasicCrawler:
 
         #print("clean_url", full_url)
         return full_url
-
-
-# Instantiate the crawler with the starting URL
-start_url = 'https://vm009.rz.uos.de/crawl/index.html'
-crawler = BasicCrawler(start_url)
-# Begin the crawling process
-crawler.crawl()
