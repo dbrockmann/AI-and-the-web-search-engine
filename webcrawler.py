@@ -5,7 +5,7 @@ class BasicCrawler:
     def __init__(self, base_url, index):
         # Remove any trailing slashes and store the base URL
         self.base_url = base_url.rstrip('/')
-        print(self.base_url)
+        #print(self.base_url)
         # Extract the domain name to ensure we stay on the same server
         self.domain = self.get_domain(self.base_url)
         print("domain", self.domain)
@@ -23,7 +23,7 @@ class BasicCrawler:
 
     def crawl(self):
         # Keep crawling until we have no more URLs left to visit
-        print(self.urls_to_visit)
+        #print(self.urls_to_visit)
         while self.urls_to_visit:
             url = self.urls_to_visit.pop()
             if url not in self.visited_urls:
@@ -44,7 +44,7 @@ class BasicCrawler:
                 self.index.add(url, response.text)
                 # Extract and queue new URLs found on this page
                 self.extract_urls(response.text, url)
-                print(self.extract_urls(response.text, url))
+                #print(self.extract_urls(response.text, url))
             else:
                 # If the content is not HTML or the request failed, log the status code
                 print(f"Failed to retrieve HTML content. Status code: {response.status_code}")
@@ -57,7 +57,7 @@ class BasicCrawler:
         soup = BeautifulSoup(html_content, 'html.parser')
         for link in soup.find_all('a', href=True):
             href = link['href']
-            print("Überprüfende Links", href)
+            #print("Überprüfende Links", href)
             # Make sure the URL is valid and within the same domain
             if self.is_valid_url(href):
                 # Normalize the URL (handle relative paths)
@@ -117,7 +117,7 @@ class BasicCrawler:
             # Combine base URL with the relative path
             full_url = f"{base_path_url}{path.split('#')[0]}"
 
-        print("clean_url", full_url)
+        #print("clean_url", full_url)
         return full_url
 
 
