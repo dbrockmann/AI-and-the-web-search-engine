@@ -2,7 +2,7 @@ import requests
 from bs4 import BeautifulSoup
 
 class BasicCrawler:
-    def __init__(self, base_url):
+    def __init__(self, base_url, index):
         # Remove any trailing slashes and store the base URL
         self.base_url = base_url.rstrip('/')
         print(self.base_url)
@@ -13,6 +13,8 @@ class BasicCrawler:
         self.visited_urls = set()
         # Start with a set that includes only the base URL
         self.urls_to_visit = {self.base_url}
+        # Index to store information
+        self.index = index
 
     def get_domain(self, url):
         # Get the domain of a URL by stripping away the 'http://' or 'https://'
@@ -38,6 +40,8 @@ class BasicCrawler:
                     'text/html' in response.headers.get('Content-Type', '')):
                 # Add URL to the visited set
                 self.visited_urls.add(url)
+                # Add information to index
+                self.index.add(url, response.text)
                 # Extract and queue new URLs found on this page
                 self.extract_urls(response.text, url)
                 print(self.extract_urls(response.text, url))
