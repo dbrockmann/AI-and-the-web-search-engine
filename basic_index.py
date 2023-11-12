@@ -3,7 +3,7 @@ import re
 from bs4 import BeautifulSoup
 
 
-class Index:
+class BasicIndex:
     """
     Builds a simple dictionary based index with words as the keys and a list of URLs that refer to pages including the word as values
     """

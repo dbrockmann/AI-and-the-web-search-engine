@@ -162,3 +162,4 @@ cython_debug/
 # Custom
 myenv/
 .DS_Store
+index_data/
