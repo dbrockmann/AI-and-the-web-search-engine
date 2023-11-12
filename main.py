@@ -1,11 +1,11 @@
 
 from webcrawler import BasicCrawler
-from indexing import Index
+from basic_index import BasicIndex
 
 
 start_url = 'https://vm009.rz.uos.de/crawl/index.html'
 
-index = Index()
+index = BasicIndex()
 crawler = BasicCrawler(start_url, index)
 crawler.crawl()
 
