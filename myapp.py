@@ -13,19 +13,19 @@ def start():
     </head>
     <body>
         <h1>Best search engine ever</h1>
-        <form action="/search-results" method="post">
-            <input type="text" name="input_text" placeholder="Enter your text here">
-            <input type="submit" value="Suche">
+        <form action="/search-results" method="get">
+            <input type="text" name="q" placeholder="Enter your search">
+            <input type="submit" value="Search">
         </form>
     </body>
     </html>
     '''
 
 
-@app.route("/search-results", methods=['POST'])
+@app.route("/search-results", methods=['GET'])
 def search_results():
 
-    input_text = request.form['input_text']
+    search_query = request.args.get('q', '')  
 
     # Eine vordefinierte Liste
     fitting_urls = ["Element 1", "Element 2", "Element 3"]
@@ -45,7 +45,7 @@ def search_results():
     <body>
         <h1>Best search engine ever - Search Results</h1>
         <div>
-            <p>Your results for the search: "{input_text}" are:</p>
+            <p>Your results for the search: "{search_query}" are:</p>
             <ul>
                 {list_html}
             </ul>
