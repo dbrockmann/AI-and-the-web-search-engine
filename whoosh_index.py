@@ -1,19 +1,47 @@
 
+import os
 import sys
 import re
 import numpy as np
 from whoosh import index
 from whoosh.fields import Schema, TEXT, ID
-from whoosh.qparser import MultifieldParser, FuzzyTermPlugin
+from whoosh.qparser import MultifieldParser, FuzzyTermPlugin, OrGroup
 from whoosh.scoring import BM25F
+from whoosh.spelling import Corrector, ListCorrector
 from whoosh.index import EmptyIndexError
 from bs4 import BeautifulSoup
 from bs4.element import Comment
 
 
+class CustomMultiCorrector(Corrector):
+    """
+    Fix a bug in the MultiCorrector implementation, returning (sug, score) tuples insted of (score, sug) which is expected by Corrector. Issue on that bug exists since 2022 (https://github.com/mchaput/whoosh/issues/21).
+    Add weighting for different correctors.
+    Add automatic prefix for word suggestions.
+    """
+
+    def __init__(self, correctors, weighting):
+        self.correctors = correctors
+        self.weighting = weighting
+    
+    def _suggestions(self, text, maxdist, prefix):
+        if prefix == 'auto':
+            prefix = len(text)
+        suggestions = {}
+
+        for weight, corrector in zip(self.weighting, self.correctors):
+            for score, sug in corrector._suggestions(text, maxdist, prefix):
+                if not sug in suggestions:
+                    suggestions[sug] = 0
+                suggestions[sug] += weight * score
+
+        for sug, score in suggestions.items():
+            yield score, sug
+
+
 class WhooshIndex:
 
-    def __init__(self, folder_path, load=False):
+    def __init__(self, folder_path, load=False, word_list='data/words_alpha.txt'):
         """
         Initializes new index or loads existing index
 
@@ -29,12 +57,19 @@ class WhooshIndex:
         )
 
         if not load:
+            if not os.path.exists(folder_path):
+                os.makedirs(folder_path)
             self.index = index.create_in(folder_path, schema)
         else:
             try:
                 self.index = index.open_dir(folder_path)
             except EmptyIndexError:
                 sys.exit('Error: Build the index before starting the web app.')
+
+        if not word_list is None:
+            with open('data/words_alpha.txt', 'r') as word_file:
+                word_data = word_file.read().split('\n')
+                self.list_corrector = ListCorrector(word_data)
 
 
     def add(self, url, html_content):
@@ -79,10 +114,12 @@ class WhooshIndex:
         last_word = search_query.split()[-1]
 
         with self.index.searcher() as searcher:
-            corrector = searcher.corrector('content')
-            suggestions = corrector.suggest(last_word, limit=5)
+            search_corrector = searcher.corrector('content')
+            corrector = CustomMultiCorrector([self.list_corrector, search_corrector], [1, 0.1])
 
-        suggestions = [pre_string + s for s in suggestions]
+            suggestions = corrector.suggest(last_word.lower(), limit=6, maxdist=6, prefix='auto')
+
+        suggestions = [pre_string + last_word + s[len(last_word):] for s in suggestions]
 
         return suggestions
 
@@ -97,10 +134,11 @@ class WhooshIndex:
             list of dictionaries with path and title
         """
 
-        query_parser = MultifieldParser(['title', 'content'], schema=self.index.schema)
+        query_parser = MultifieldParser(['title', 'content'], schema=self.index.schema, group=OrGroup)
         query_parser.add_plugin(FuzzyTermPlugin())
 
-        fuzzy_search_query = ' '.join(f'{word}~1' for word in search_query.split())
+        # fuzzy search query, longer prefix for shorter words
+        fuzzy_search_query = ' '.join(f'{word}~2/2' if len(word) < 5 else f'{word}~2/1' if len(word) < 7 else f'{word}~2' for word in search_query.split())
         parsed_query = query_parser.parse(fuzzy_search_query)
 
         with self.index.searcher(weighting=BM25F()) as searcher:

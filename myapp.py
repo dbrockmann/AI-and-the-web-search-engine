@@ -26,10 +26,12 @@ def start():
             <img id="logo" src="/static/icon.png" alt="Best search engine ever">
             <h1>Best search engine ever</h1>
             <form action="/search-results" method="get">
-                <input id="search-input" type="text" autocomplete="off" name="q" placeholder="Enter your search">
-                <input type="submit" value="Search">
-                <div id="search-suggestions">
-                    <div><ul id="search-suggestions-list"></ul></div>
+                <div>
+                    <input id="search-input" type="text" autocomplete="off" name="q" placeholder="Enter your search">
+                    <input type="submit" value="Search">
+                    <div id="search-suggestions">
+                        <div><ul id="search-suggestions-list"></ul></div>
+                    </div>
                 </div>
             </form>
         </div>
@@ -65,7 +67,7 @@ def search_results():
     <html>
     <head>
         <title>Search Results</title>
-        <link rel="stylesheet" type="text/css" href="/static/result.css">
+        <link rel="stylesheet" type="text/css" href="/static/results.css">
         <link rel="stylesheet" type="text/css" href="/static/form.css">
         <script src="/static/search_suggestions.js"></script>
     </head>
@@ -88,8 +90,8 @@ def search_results():
                     </div>
                 </div>
             </div>
-            <div>
-                <ul id="results">
+            <div id="results">
+                <ul>
                     {results_html}
                 </ul>
             </div>

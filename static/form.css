@@ -36,7 +36,6 @@ input[type="submit"]:hover {
 
 #search-suggestions {
     display: none;
-    position: relative;
     top: 0px;
     padding: 0px;
 }
@@ -61,7 +60,6 @@ input[type="submit"]:hover {
 }
 
 #search-suggestions-list {
-    position: relative;
     list-style-type: none;
     margin: 0px;
     padding-left: 0px;
