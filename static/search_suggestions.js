@@ -20,8 +20,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 const listItem = document.createElement('li');
                 listItem.innerText = item;
                 listItem.addEventListener('click', () => {
-                    window.open(`/search-results?q=${encodeURIComponent(item)}`, '_self')
-                })
+                    window.open(`/search-results?q=${encodeURIComponent(item)}`, '_self');
+                });
 
                 list.appendChild(listItem);
             });
@@ -32,7 +32,7 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     // attach event listener to search field
-    search_input.addEventListener('input', update_list)
-    search_input.addEventListener('focus', update_list)
+    search_input.addEventListener('input', update_list);
+    search_input.addEventListener('focus', update_list);
 });
   
