@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const value = search_input.value;
     
         // fetch suggestion data and update list
-        fetch(`${window.location.origin}/search-suggestions?q=${encodeURIComponent(value)}`).then(response => {
+        fetch(`${document.baseURI}/search-suggestions?q=${encodeURIComponent(value)}`).then(response => {
             if (!response.ok) throw new Error('Incorrect response');
             return response.json();
         }).then(data => {
@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const listItem = document.createElement('li');
                 listItem.innerText = item;
                 listItem.addEventListener('click', () => {
-                    window.open(`/search-results?q=${encodeURIComponent(item)}`, '_self');
+                    window.open(`search-results?q=${encodeURIComponent(item)}`, '_self');
                 });
 
                 list.appendChild(listItem);

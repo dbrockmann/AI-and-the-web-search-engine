@@ -10,22 +10,23 @@ index = WhooshIndex('index_data', load=True)
 app = Flask(__name__)
 
 
-@app.route("/", methods=['GET'])
+@app.route('/', methods=['GET'])
 def start():
     return '''
     <!DOCTYPE html>
     <html>
     <head>
         <title>Start Page</title>
-        <link rel="stylesheet" type="text/css" href="/static/start.css">
-        <link rel="stylesheet" type="text/css" href="/static/form.css">
-        <script src="/static/search_suggestions.js"></script>
+        <base href="/user028/bsee.wsgi/"/>
+        <link rel="stylesheet" type="text/css" href="static/start.css">
+        <link rel="stylesheet" type="text/css" href="static/form.css">
+        <script src="static/search_suggestions.js"></script>
     </head>
     <body>
         <div id="content">
-            <img id="logo" src="/static/icon.png" alt="Best search engine ever">
+            <img id="logo" src="static/icon.png" alt="Best search engine ever">
             <h1>Best search engine ever</h1>
-            <form action="/search-results" method="get">
+            <form action="search-results" method="get">
                 <div>
                     <input id="search-input" type="text" autocomplete="off" name="q" placeholder="Enter your search">
                     <input type="submit" value="Search">
@@ -40,7 +41,7 @@ def start():
     '''
 
 
-@app.route("/search-results", methods=['GET'])
+@app.route('/search-results', methods=['GET'])
 def search_results():
 
     search_query = request.args.get('q', '')
@@ -67,16 +68,17 @@ def search_results():
     <html>
     <head>
         <title>Search Results</title>
-        <link rel="stylesheet" type="text/css" href="/static/results.css">
-        <link rel="stylesheet" type="text/css" href="/static/form.css">
-        <script src="/static/search_suggestions.js"></script>
+        <base href="/user028/bsee.wsgi/"/>
+        <link rel="stylesheet" type="text/css" href="static/results.css">
+        <link rel="stylesheet" type="text/css" href="static/form.css">
+        <script src="static/search_suggestions.js"></script>
     </head>
     <body>
         <div id="content">
             <div id="header">
-                <a id="logo" href="/"><img src="/static/icon.png" alt="Best search engine ever"></a>
+                <a id="logo" href=""><img src="static/icon.png" alt="Best search engine ever"></a>
                 <h1>Best search engine ever</h1>
-                <form action="/search-results" method="get">
+                <form action="search-results" method="get">
                     <input id="search-input" type="text" autocomplete="off" name="q" placeholder="Enter your search" value="{search_query}">
                     <input type="submit" value="Search">
                     <div id="search-suggestions">
@@ -113,4 +115,4 @@ def search_suggestions():
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=False)
