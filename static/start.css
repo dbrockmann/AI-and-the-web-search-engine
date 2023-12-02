@@ -2,60 +2,30 @@
 
 body {
     font-family: Arial, sans-serif;
-    background-color: #e0f7fa; /* Light blue background */
+    background-color: #1a1a1a;
+    color: #ffffff;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh; /* Full viewport height */
-    margin: 0; /* Remove default margin */
+    height: 100vh;
+    margin: 0;
 }
 
+
+#content {
+    position: absolute;
+    top: 20%;
+    margin: 0 auto;
+    text-align: center;
+}
 
 h1 {
     font-size: 48px;
-    color: #0d4123; /* Darker blue for the header */
-    text-align: center;
-    position: absolute;
-    top: 20%;
-    width: 100%;
+    color: #349d4b;
+    margin-top: 0px;
+    margin-bottom: 70px;
 }
 
-h2 {
-    font-size: 32px;
-    color: #0d4123; /* Darker blue for the header */
-    text-align: center;
-    position: absolute;
-    top: 10%;
-    width: 100%;
+#logo {
+    width: 200px;
 }
-
-
-form {
-    text-align: center;
-    margin-top: -20px; /* Adjust if needed */
-}
-
-input[type="text"] {
-    border: 2px solid #0277bd; /* Blue border for the text input */
-    padding: 10px; /* Larger padding for bigger field */
-    width: 300px; /* Wider input field */
-}
-
-input[type="submit"] {
-    background-color: #29b6f6; /* Lighter blue for the submit button */
-    color: white;
-    padding: 10px 15px;
-    border: none;
-    cursor: pointer;
-    margin-left: 10px;
-}
-
-input[type="submit"]:hover {
-    background-color: #0288d1; /* Slightly darker blue on hover */
-}
-
-.search-content {
-    text-align: left;
-    margin-left: 20px; /* Adjust as needed for the desired margin */
-}
-

@@ -1,28 +1,146 @@
 /* result.css */
 
 
+/* Logo and general layout */
+
 body {
     font-family: Arial, sans-serif;
-    background-color: #e0f7fa; /* Light blue background */
-    margin: 0; /* Reset default margin */
-    padding-left: 280px; /* Apply consistent left padding for all content */
+    background-color: #1a1a1a;
+    color: #ffffff;
+    margin: 0;
 }
 
-h1, h2 {
+#logo {
+    position: fixed;
+    left: 30px;
+    width: 140px;
+}
+
+#logo img {
+    position: absolute;
+    max-width: 100%;
+    height: auto;
+}
+
+#content {
+    position: absolute;
     margin-top: 120px;
+    margin-left: 200px;
+    width: clamp(700px, 70%, 1400px);
+}
+
+/* For small width, change layout */
+
+@media (max-width: 920px) {
+    #logo {
+        position: absolute;
+        left: 0px;
+        top: 5px;
+        width: 105px;
+    }
+    #content {
+        margin-left: 20px;
+        width: max(calc(100vw - 40px), 700px)
+    }
+    h1 {
+        left: 115px;
+    }
+}
+
+
+/* Header and title */
+
+#header {
+    position: relative;
+}
+
+h1 {
+    position: relative;
     font-size: 40px;
-    color: #0d4123; /* Dark green color for headers */
-    margin-left: 38px; /* Consistent left margin for headers */
+    color: #349d4b;
     text-align: left;
-}
-
-/* If there are other elements you want to align similarly, you can add them here. For example: */
-p, div, ul {
-    font-size: 26px;
-    margin-left: 20px; /* Apply the same left margin */
+    margin-top: 0px;
 }
 
 
 
+form {
+    margin-top: 20px;
+}
 
 
+/* Info field for different shades */
+
+#result-ranking-info {
+    position: absolute;
+    bottom: 20px;
+    right: 260px;
+    font-size: 12px;
+    font-style: italic;
+}
+
+#result-ranking-info div {
+    position: fixed;
+    width: 250px;
+    padding: 5px;
+    padding-top: 0px;
+    border-radius: 5px;
+    transition: background-color 0.5s;
+}
+
+#result-ranking-info:hover div {
+    background-color: #1a1a1a;
+    border: 2px solid #3f3f3f;
+}
+
+.hidden {
+    display: none;
+}
+
+#result-ranking-info:hover .hidden {
+    display: inline;
+}
+
+
+/* Result list */
+
+#results {
+    list-style-type: none;
+    padding: 0;
+}
+
+#results li {
+    margin-bottom: 20px;
+    padding: 20px;
+    border-radius: 5px;
+    font-size: 16px;
+    color: #ffffff;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+.result-link h2 {
+    font-size: 22px;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    color: #5cbf64;
+    text-decoration: none;
+}
+
+.result-link {
+    text-decoration: none;
+    color: #ffffff;
+}
+
+.result-link:hover h2 {
+    text-decoration: underline;
+}
+
+.result-link cite {
+    font-size: 12px;
+    font-style: normal;
+}
+
+.highlight-match {
+    color: #349d4b;
+}
