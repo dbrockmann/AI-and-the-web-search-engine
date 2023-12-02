@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const value = search_input.value;
     
         // fetch suggestion data and update list
-        fetch(`${document.baseURI}/search-suggestions?q=${encodeURIComponent(value)}`).then(response => {
+        fetch(`search-suggestions?q=${encodeURIComponent(value)}`).then(response => {
             if (!response.ok) throw new Error('Incorrect response');
             return response.json();
         }).then(data => {

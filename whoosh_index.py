@@ -138,7 +138,7 @@ class WhooshIndex:
         query_parser.add_plugin(FuzzyTermPlugin())
 
         # fuzzy search query, longer prefix for shorter words
-        fuzzy_search_query = ' '.join(f'{word}~2/2' if len(word) < 5 else f'{word}~2/1' if len(word) < 7 else f'{word}~2' for word in search_query.split())
+        fuzzy_search_query = ' '.join(f'{word}~2/2' if len(word) > 1 and len(word) < 5 else f'{word}~2/1' if len(word) < 7 else f'{word}~2' for word in search_query.split())
         parsed_query = query_parser.parse(fuzzy_search_query)
 
         with self.index.searcher(weighting=BM25F()) as searcher:

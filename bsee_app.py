@@ -16,16 +16,15 @@ def start():
     <!DOCTYPE html>
     <html>
     <head>
-        <title>Start Page</title>
-        <base href="/user028/bsee.wsgi/"/>
+        <title>Best Search Engine Ever - Start Page</title>
         <link rel="stylesheet" type="text/css" href="static/start.css">
         <link rel="stylesheet" type="text/css" href="static/form.css">
         <script src="static/search_suggestions.js"></script>
     </head>
     <body>
         <div id="content">
-            <img id="logo" src="static/icon.png" alt="Best search engine ever">
-            <h1>Best search engine ever</h1>
+            <img id="logo" src="static/icon.png" alt="Best Search Engine Ever">
+            <h1>Best Search Engine Ever</h1>
             <form action="search-results" method="get">
                 <div>
                     <input id="search-input" type="text" autocomplete="off" name="q" placeholder="Enter your search">
@@ -67,8 +66,7 @@ def search_results():
     <!DOCTYPE html>
     <html>
     <head>
-        <title>Search Results</title>
-        <base href="/user028/bsee.wsgi/"/>
+        <title>Best Search Engine Ever - Search Results</title>
         <link rel="stylesheet" type="text/css" href="static/results.css">
         <link rel="stylesheet" type="text/css" href="static/form.css">
         <script src="static/search_suggestions.js"></script>
@@ -76,8 +74,8 @@ def search_results():
     <body>
         <div id="content">
             <div id="header">
-                <a id="logo" href=""><img src="static/icon.png" alt="Best search engine ever"></a>
-                <h1>Best search engine ever</h1>
+                <a id="logo" href="."><img src="static/icon.png" alt="Best Search Engine Ever"></a>
+                <h1>Best Search Engine Ever</h1>
                 <form action="search-results" method="get">
                     <input id="search-input" type="text" autocomplete="off" name="q" placeholder="Enter your search" value="{search_query}">
                     <input type="submit" value="Search">
