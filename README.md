@@ -6,6 +6,7 @@ Search engine project of the course AI and the Web at the University of Osnabrü
 ## Features
 
 - dynamic search suggestions while typing based on a word list and crawled content
+- fuzzy search to find content despite typos
 - search result preview with marked search query matches
 - color indication of the results to show how good a result matches the search
 
@@ -27,7 +28,7 @@ For searching the index, both title and contents of the pages are searched for m
 
 ### App
 
-The app is implemented using `Flask`. It includes a start page, from which a search can be started and a page with results of a previous search. The results are colored in a varying shade of green which is based on the normalized search scores. If for example the first 3 results match the search query equally good, they have the same color. This can enhance the user experience as it gives information about the results in addition to the order. In addition to the title and URL of a result, the list includes a preview of parts that include the search query. These words are also marked as matches. To enhance the search experience, the app shows search suggestions which are constantly updated while typing. This feature is implemented by using a `javascript` script that send a `GET` request to the server each time the search text is altered. The response is the put in a list which is shown under the search bar. A click on a suggestion opens the results page for that search.
+The app is implemented using `Flask`. It includes a start page, from which a search can be started and a page with results of a previous search. The results are colored in a varying shade of green which is based on the normalized search scores. If for example the first 3 results match the search query equally good, they have the same color. This can enhance the user experience as it gives information about the results in addition to the order. In addition to the title and URL of a result, the list includes a preview of parts that include the search query. These words are also marked as matches. To enhance the search experience, the app shows search suggestions which are constantly updated while typing. This feature is implemented by using a `javascript` script that sends a `GET` request to the server each time the search text is altered. The response is the put in a list which is shown under the search bar. A click on a suggestion opens the results page for that search.
 
 ## Getting Started
 
