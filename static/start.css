@@ -1,0 +1,30 @@
+/* start.css */
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #1a1a1a;
+    color: #ffffff;
+    margin: 0;
+    overflow: hidden;
+}
+
+
+#content {
+    margin: 20% auto;
+    text-align: center;
+}
+
+h1 {
+    font-size: 48px;
+    color: #349d4b;
+    margin-top: 0px;
+    margin-bottom: 70px;
+}
+
+#logo {
+    width: 200px;
+}
+
+form > div {
+    display: inline-block;
+}
